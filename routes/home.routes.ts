@@ -7,6 +7,7 @@ export class HomeRoutes {
     public routes(app: Application): void {
         
     app.route("/home").get(this.homeController.home);
+    app.route("/space").get(this.homeController.fetchAllSpace);
     
     }
 }
