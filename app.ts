@@ -1,11 +1,15 @@
+import { config } from "dotenv";
+config();
+
 import express, { Application, Request, Response, NextFunction } from "express";
 import morgan from "morgan";
+import mongoose from "mongoose";
 
 import { Routes } from "./routes/index.routes";
 
 class App {
   public express: Application;
-  public mongoPath = `${process.env.MONGO_PATH}`;
+  public mongoPath: any = process.env.MONGO_PATH;
   public router: Routes = new Routes();
 
   constructor() {
@@ -15,31 +19,21 @@ class App {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: false }));
     this.router.routes(this.express);
-    // if (process.env.SERVER_ENV === "production") {
-    //   this.createAdmin();
-    // }
+    this.initialiseDatabaseConnection();
   }
 
-  // private async createAdmin() {
-  //   try {
-  //     const userCount = await User.countDocuments();
-  //     if (userCount === 0) {
-  //       const adminUser = await User.create({
-  //         email: "admin@myspace.africa",
-  //         password: "Admin@myspace",
-  //         role: "admin",
-  //         firstName: "My",
-  //         lastName: "Space",
-  //         isActive: true,
-  //       });
+  private initialiseDatabaseConnection(): void {
 
-  //       console.log("admin user created ", adminUser);
-  //     }
-  //   } catch (error) {
-  //     console.log("create admin error");
-  //   }
-  // }
-
+    mongoose.connect(`${process.env.MONGO_PATH}`);
+    mongoose
+      .connect(this.mongoPath)
+      .then((res) => {
+        console.log(`mongoDB connection: ${this.mongoPath}`);
+      })
+      .catch((err) => {
+        console.log("mongo error in connection:", err.message || err);
+      });
+  }
 }
 
 export default new App().express;
