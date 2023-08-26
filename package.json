@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/server.js",
+    "start": "node server.ts",
     "dev": "nodemon server.ts",
     "build": "tsc",
     "start:dev": "ts-node ./server.ts",
@@ -15,6 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/bsquare579/mySpace.git"
   },
+  "keywords": [
+    "myspace",
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
