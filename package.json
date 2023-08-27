@@ -2,11 +2,11 @@
   "name": "myspace",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.ts",
-    "dev": "nodemon server.ts",
+    "start": "node build/server.js",
+    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "build": "tsc",
     "start:dev": "ts-node ./server.ts",
     "start:watch": "nodemon"
@@ -37,5 +37,8 @@
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "tsc-watch": "^6.0.4"
   }
 }
